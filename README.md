@@ -6,7 +6,7 @@
 1. download cronjob.yml
   - download
 ```
-wget https://raw.githubusercontent.com/wasit7/dsi321_2023/main/week13/conjob.yaml
+wget https://raw.githubusercontent.com/baeby0329/TWL-2/main/conjob.yaml
 ```
 2. apply cronjob
 ```
@@ -52,21 +52,21 @@ pip install -r requirement.txt
 ```
 
 * Create metadata.json  (see detail in link) : you have to modified information corresponding to your information - warning : name should be unique small letter and title should be big letter  
-https://github.com/wasit7/dsi321_2023/blob/main/week13/metadata.json
+https://github.com/baeby0329/TWL-2/blob/main/metadata.json
 ```bash
 # bash & wsl
-wget https://raw.githubusercontent.com/wasit7/dsi321_2023/main/week13/metadata.json
+wget https://github.com/baeby0329/TWL-2/blob/main/metadata.json
 ```
 * Edit dataset name and title to match your dataset and contain your team_id
 ```json
-    "name": "thailand_gdp03",   # must change this line to weather_wsl01
-    "title": "THAILAND_GDP_03", # must change this line to weather_wsl01
+    "name": "weather-twl02",   # must change this line to weather_xxxxx
+    "title": "WEATHER-TWL02", # must change this line to weather_xxxxx
 ```
 
 * Create .env
 ```bash
 # bash & WSL
-wget https://github.com/wasit7/dsi321_2023/blob/main/week13/.env-template
+wget https://github.com/baeby0329/TWL-2/blob/main/.env-template
 cp .env-template .env      #ubuntu / mac
 ```
 
@@ -109,7 +109,7 @@ dfs = pd.read_html("https://docs.google.com/spreadsheets/d/e/2PACX-1vQlEs3FxFPwm
 ## Integrate everything in scripy.py
 * use scripy.py from template
 ```bash
-wget https://raw.githubusercontent.com/wasit7/dsi321_2023/main/week13/scripy.py
+wget https://raw.githubusercontent.com/baeby0329/TWL-2/main/scripy.py
 ```
 * modify your ETL in scripy.py
 * modify your ckan config in scripy.py
@@ -121,7 +121,7 @@ WORKDIR /code
 COPY . .
 COPY requirement.txt  requirement.txt
 RUN pip install -r /code/requirement.txt
-# เหมือนจะขาดไปหนึ่งบรรทัด
+CMD ["python","scripy.py"]
 ```
 * run with docker
 
@@ -132,16 +132,16 @@ RUN pip install -r /code/requirement.txt
 * Create conjob.yaml (see details in the following link)
 
 Please change the "name" to your team_id 
-https://github.com/wasit7/dsi321_2023/blob/main/week13/conjob.yaml
+https://github.com/baeby0329/TWL-2/blob/main/conjob.yaml
 ```yml
-name: scripy-web-wsl01 # change team-id to your team e.g. wsl01
+name: scripy-web-twl02 # change team-id to your team e.g. wsl01
 
 ```
 * Modify schedule cronjob to every 6 hours
 * Warning : this step requires publish your docker image to docker hub 
 ```yaml
-schedule: "* * * * *"   # modify to every 6 hours
-image: kran13200/simple-scripy:latest # use your docker hub
+schedule: "0 */6 * * *"   # modify to every 6 hours
+image: baeby0329/simple-scripy:latest # use your docker hub
 ```
 
 ## Publish to Docker hub
